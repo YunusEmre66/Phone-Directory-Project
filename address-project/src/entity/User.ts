@@ -14,5 +14,8 @@ export class User {
 
     @Column()
     age: number
+//! 
+    @Column()
+    email: string
 
 }
