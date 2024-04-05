@@ -1,5 +1,9 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
+import { Country } from "./Country";
+import { City } from "./City";
+import { District } from "./District";
+import { Town } from "./Town";
 
 enum type { JOB = "iş", HOME= "ev", OTHER = "diğer", SCHOOL = "okul"}
 
@@ -23,6 +27,29 @@ export class Address {
     location : string;
 
     @ManyToOne(() => User, user => user.id)  //! bir çok adres bir kullanıcıya ait olabilir
+    @JoinColumn()
     user : User;
+
+    @ManyToOne(() => Country, (country) => country.id)  
+    @JoinColumn()
+    country: Country 
+
+    @ManyToOne(() => City, (city) => city.id)  
+    @JoinColumn()
+    city: City
+
+    @ManyToOne(() => District, (district) => district.id)
+    @JoinColumn()
+    district: District
+
+    @ManyToOne(()=> Town, (town) => town.id)
+    @JoinColumn()
+    town: Town
+
+
+
+
+
+
 
 }
