@@ -38,6 +38,7 @@ AppDataSource.initialize().then(async () => {
             firstName: "Timber",
             lastName: "Saw",
             age: 27
+
         })
     )
 
@@ -46,6 +47,9 @@ AppDataSource.initialize().then(async () => {
             firstName: "Phantom",
             lastName: "Assassin",
             age: 24
+
+
+
         })
     )
 
