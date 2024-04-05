@@ -5,6 +5,8 @@ import { AppDataSource } from "./data-source"
 import { Routes } from "./routes"
 import { User } from "./entity/User"
 
+const PORT = 3000;
+
 AppDataSource.initialize().then(async () => {
 
     // create express app
@@ -28,7 +30,7 @@ AppDataSource.initialize().then(async () => {
     // ...
 
     // start express server
-    app.listen(3000)
+    app.listen(PORT)
 
     // insert new users for test
     await AppDataSource.manager.save(
@@ -47,6 +49,6 @@ AppDataSource.initialize().then(async () => {
         })
     )
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results")
+    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results", PORT)
 
 }).catch(error => console.log(error))

@@ -12,12 +12,12 @@ export const Routes = [{
     action: "one"
 }, {
     method: "post",
-    route: "/users",
+    route: "/users/add",
     controller: UserController,
     action: "save"
 }, {
     method: "delete",
-    route: "/users/:id",
+    route: "/users/delete/:id",
     controller: UserController,
     action: "remove"
 }]
