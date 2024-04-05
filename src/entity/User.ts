@@ -26,5 +26,9 @@ export class User {
 
   @OneToMany(() => Address, (address) => address.user)
   address: Address;
+
+  @OneToMany(() => Phone, (phone) => phone.user)
+  phone: Phone;
+  
   
 }
