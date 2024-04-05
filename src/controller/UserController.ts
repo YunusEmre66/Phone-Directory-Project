@@ -36,16 +36,22 @@ export class UserController {
     return this.userRepository.save(user);
   }
 
-//   async update(request: Request, response: Response, next: nextFunction) {
-//     const userId = parseInt(request.body.id);
+  async update(request: Request, response: Response, next: NextFunction) {
+    const userId = parseInt(request.body.id);
 
-//     const { firstName, lastName, age, phone}  =request.body; 
+    const { firstName, lastName, age, phone }: User = request.body;
 
-//     const us = await this.userRepository.findOne({id: userId});
 
-//     return this.userRepository.update(us)
-
-//   }
+    return this.userRepository.update(
+      { id: userId },
+      {
+        firstName: firstName,
+        lastName: lastName,
+        age: age,
+        phone: phone,
+      }
+    );
+  }
 
   async remove(request: Request, response: Response, next: NextFunction) {
     const id = parseInt(request.params.id);

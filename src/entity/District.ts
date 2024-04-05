@@ -1,6 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { City } from "./City";
-import { District } from './District';
 import { Town } from "./Town";
 
 
@@ -17,7 +16,7 @@ export class District {
     @ManyToOne (() => City, (city) => city.id)
     @JoinColumn()
     city : City; 
-    
+
     @OneToMany(() => Town , (town) => town.district)
     town : Town;
 
