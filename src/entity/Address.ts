@@ -5,7 +5,7 @@ import { City } from "./City";
 import { District } from "./District";
 import { Town } from "./Town";
 
-enum type { JOB = "iş", HOME= "ev", OTHER = "diğer", SCHOOL = "okul"}
+enum type { JOB = "iş", HOME= "ev"}
 
 
 @Entity ()
@@ -26,7 +26,7 @@ export class Address {
     @Column()
     location : string;
 
-    @ManyToOne(() => User, user => user.id)  //! bir çok adres bir kullanıcıya ait olabilir
+    @ManyToOne(() => User, user => user.id)  //! bir çok adres bir kullanıcıya ait olabilir, bu veriler veritabanına veya req.body tarafına elle girilen veriler değil. id verileri req.body ye elle veri girdiğimizde otomatik olarak oluşur.
     @JoinColumn()
     user : User;
 

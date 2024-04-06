@@ -1,12 +1,28 @@
 import { AppDataSource } from "../data-source";
 import { NextFunction, Request, Response } from "express";
 import { User } from "../entity/User";
+import { Like } from "typeorm";
 
 export class UserController {
   private userRepository = AppDataSource.getRepository(User);
 
   async all(request: Request, response: Response, next: NextFunction) {
-    return this.userRepository.find();
+    return this.userRepository.find({relations : {phone : true, address : true, email : true}});
+  }
+
+  async search(request: Request, response : Response , next: NextFunction) {
+
+    const firstName = request.query["firstName"] as string;
+    const lastName = request.query["lastName"] as string;
+
+    console.log(firstName, lastName);
+
+    return this.userRepository.find({
+      where : {
+        firstName : Like(`%${firstName}%`),
+        lastName : Like(`%${lastName}%`)
+      }
+    })
   }
 
   async one(request: Request, response: Response, next: NextFunction) {
