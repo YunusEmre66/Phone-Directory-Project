@@ -30,12 +30,24 @@ export const Routes = [
     route: "/users/update/:id",
     controller: UserController,
     action: "update",
-  },
+  }, {
+    method: "get",
+    route: "/users/search",
+    controller: UserController,
+    action: "search"
+},
   //!address
   {
     method: "get",
     controller: AddressController,
     route: "/address/:id",
     action: "one",
-  },
+  }
+  
+//   , {
+//     method: "get",
+//     route: "/search",
+//     controller: SearchController,
+//     action: "all"
+// }
 ];

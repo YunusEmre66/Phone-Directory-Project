@@ -7,22 +7,26 @@ export class UserController {
   private userRepository = AppDataSource.getRepository(User);
 
   async all(request: Request, response: Response, next: NextFunction) {
-    return this.userRepository.find({relations : {phone : true, address : true, email : true}});
+    return this.userRepository.find({
+      relations: { phone: true, address: true, email: true },
+    });
   }
 
-  async search(request: Request, response : Response , next: NextFunction) {
-
-    const firstName = request.query["firstName"] as string;
-    const lastName = request.query["lastName"] as string;
+  async search(request: Request, response: Response, next: NextFunction) {
+    //! get post yapılmış search neden yapılmamış
+    //! mesela başında t olan sonunda u olan bütün kullanıcıları getir gibi istekler yapılsaydı iyi olurdu. bu işlemler mysql tarafında yapılır.
+    const firstName = request.query["firstName"] as string; //! query string olarak gelen değerleri almak için kullanılır. endpointin sonuna ?firstName=ali şeklinde yazılır.
+    const lastName = request.query["lastName"] as string; //! burdada lastName=veli şeklinde olur.
 
     console.log(firstName, lastName);
 
     return this.userRepository.find({
-      where : {
-        firstName : Like(`%${firstName}%`),
-        lastName : Like(`%${lastName}%`)
-      }
-    })
+      where: {
+        firstName: Like(`%${firstName}%`), //! like : içinde geçen değerleri getirir. % : başında ve sonunda olabilir.
+        lastName: Like(`%${lastName}%`), //! localhost:3000/user/search?firstName=ali&lastName=veli şeklinde yazılır.
+      },
+    });
+    // return this.userRepository.find({where: {firstName: firstName, lastName: lastName}})
   }
 
   async one(request: Request, response: Response, next: NextFunction) {
@@ -57,17 +61,14 @@ export class UserController {
 
     const { firstName, lastName, age }: User = request.body;
 
-
     return this.userRepository.update(
       { id: userId },
       {
         firstName,
         lastName,
-        age
-      
+        age,
       }
     );
-    
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
