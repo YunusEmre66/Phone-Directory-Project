@@ -9,6 +9,12 @@ export const Routes = [
     action: "all",
   },
   {
+    method: "get", //! /:id url ile çakışma olmaması için önce /search yazıldı.
+    route: "/users/search",
+    controller: UserController,
+    action: "search",
+  },
+  {
     method: "get",
     route: "/users/:id",
     controller: UserController,
@@ -25,29 +31,38 @@ export const Routes = [
     route: "/users/delete/:id",
     controller: UserController,
     action: "remove",
-  },{
+  },
+  {
     method: "put",
     route: "/users/update/:id",
     controller: UserController,
     action: "update",
-  }, {
-    method: "get",
-    route: "/users/search",
-    controller: UserController,
-    action: "search"
-},
+  },
+
   //!address
+  {
+    method: "get",
+    controller: AddressController,
+    route: "/address/all", //! /:id urlsi ile çakışma olmaması için önce /all yazıldı. daima böyle yazılır
+    action: "all",
+  },
   {
     method: "get",
     controller: AddressController,
     route: "/address/:id",
     action: "one",
-  }
-  
-//   , {
-//     method: "get",
-//     route: "/search",
-//     controller: SearchController,
-//     action: "all"
-// }
+  },
+  {
+    method: "get",
+    controller: AddressController,
+    route: "/address/user/:userId",
+    action: "userOne",
+  },
+
+  //   , {
+  //     method: "get",
+  //     route: "/search",
+  //     controller: SearchController,
+  //     action: "all"
+  // }
 ];

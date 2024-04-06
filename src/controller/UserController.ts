@@ -12,21 +12,26 @@ export class UserController {
     });
   }
 
-  async search(request: Request, response: Response, next: NextFunction) {
-    //! get post yapılmış search neden yapılmamış
-    //! mesela başında t olan sonunda u olan bütün kullanıcıları getir gibi istekler yapılsaydı iyi olurdu. bu işlemler mysql tarafında yapılır.
-    const firstName = request.query["firstName"] as string; //! query string olarak gelen değerleri almak için kullanılır. endpointin sonuna ?firstName=ali şeklinde yazılır.
-    const lastName = request.query["lastName"] as string; //! burdada lastName=veli şeklinde olur.
+  // async search(request: Request, response: Response, next: NextFunction) {
+  //   //! get post yapılmış search neden yapılmamış
+  //   //! mesela başında t olan sonunda u olan bütün kullanıcıları getir gibi istekler yapılsaydı iyi olurdu. bu işlemler mysql tarafında yapılır.
+  //   const firstName = request.query["firstName"] as string; //! query string olarak gelen değerleri almak için kullanılır. endpointin sonuna ?firstName=ali şeklinde yazılır.
+  //   const lastName = request.query["lastName"] as string; //! burdada lastName=veli şeklinde olur.
 
-    console.log(firstName, lastName);
+  //   console.log(firstName, lastName);
 
-    return this.userRepository.find({
-      where: {
-        firstName: Like(`%${firstName}%`), //! like : içinde geçen değerleri getirir. % : başında ve sonunda olabilir.
-        lastName: Like(`%${lastName}%`), //! localhost:3000/user/search?firstName=ali&lastName=veli şeklinde yazılır.
-      },
-    });
-    // return this.userRepository.find({where: {firstName: firstName, lastName: lastName}})
+  //   return this.userRepository.find({
+  //     where: {
+  //       firstName: Like(`%${firstName}%`), //! like : içinde geçen değerleri getirir. % : başında ve sonunda olabilir.
+  //       lastName: Like(`%${lastName}%`), //! localhost:3000/user/search?firstName=ali&lastName=veli şeklinde yazılır.
+  //     },
+  //   });
+  //   // return this.userRepository.find({where: {firstName: firstName, lastName: lastName}})
+  // }
+
+  async search(request: Request) {
+    const { firstName, lastName } = request.query as { firstName: string, lastName: string };
+    return this.userRepository.find({ where: { firstName: Like(`%${firstName}%`), lastName: Like(`%${lastName}%`) } });
   }
 
   async one(request: Request, response: Response, next: NextFunction) {

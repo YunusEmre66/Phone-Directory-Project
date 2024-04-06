@@ -12,6 +12,10 @@ yanlış url, yanlış metod, hatalı başlık, hatalı gövde(body), hatalı pa
 
 
 **************************************
+
+/address/:id ve /address/all yolları arasındaki çakışma.
+
+Express.js, yolları tanımlandıkları sıraya göre işler. Bu durumda, /address/:id yolu önce tanımlandığı için, all bir id olarak kabul edilebilir. Yani, /address/all URL'sini ziyaret ettiğinizde, one eylemi tetiklenebilir ve all id olarak kabul edilebilir.
 **************************************
 **************************************
 **************************************

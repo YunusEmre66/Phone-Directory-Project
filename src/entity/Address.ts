@@ -12,10 +12,10 @@ enum type { JOB = "iş", HOME= "ev"}
 export class Address {
 
     @PrimaryGeneratedColumn()
-    id : number;
+    id: number;
 
     @Column( {type: "enum", enum: type, default: type.HOME})
-    addressType : type;;
+    addressType: type;;
 
     @Column()
     addressLine: string; 
