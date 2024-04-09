@@ -1,4 +1,5 @@
 import { AddressController } from "./controller/AddressController";
+import { CountryController } from "./controller/CountryController";
 import { UserController } from "./controller/UserController";
 
 export const Routes = [
@@ -69,6 +70,19 @@ export const Routes = [
     route: "/address/:id",
     controller: AddressController,
     action: "update",
+  },
+  //!country
+  {
+    method: "get",
+    route: "/country/all",
+    controller: CountryController,
+    action: "all",
+  },
+  {
+    method: "get",
+    route: "/country/:countryId",
+    controller: CountryController,
+    action: "countryUsers",
   },
 
   //   , {
