@@ -8,12 +8,12 @@ import { District } from "../entity/District";
 import { Town } from "../entity/Town";
 
 export class AddressController {
-  private addressRepository = AppDataSource.getRepository(Address)
-  private userRepository = AppDataSource.getRepository(User)
-  private countryRepository = AppDataSource.getRepository(Country)
-  private cityRepository = AppDataSource.getRepository(City)
-  private districtRepository = AppDataSource.getRepository(District)
-  private townRepository = AppDataSource.getRepository(Town)
+  private addressRepository = AppDataSource.getRepository(Address);
+  private userRepository = AppDataSource.getRepository(User);
+  private countryRepository = AppDataSource.getRepository(Country);
+  private cityRepository = AppDataSource.getRepository(City);
+  private districtRepository = AppDataSource.getRepository(District);
+  private townRepository = AppDataSource.getRepository(Town);
 
   async all(request: Request, response: Response, next: NextFunction) {
     return this.addressRepository.find({
@@ -75,38 +75,83 @@ export class AddressController {
 
   async save(request: Request, response: Response, next: NextFunction) {
     const {
+      addressType,
+      addressLine,
+      street,
+      post_code,
+      location,
+      userId,
+      countryId,
+      cityId,
+      districtId,
+      townId,
+    } = request.body;
+
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    const country = await this.countryRepository.findOne({
+      where: { id: countryId },
+    });
+    const city = await this.cityRepository.findOne({ where: { id: cityId } });
+    const district = await this.districtRepository.findOne({
+      where: { id: districtId },
+    });
+    const town = await this.townRepository.findOne({ where: { id: townId } });
+
+    const address = Object.assign(new Address(), {
+      addressType: addressType,
+      addressLine: addressLine,
+      street: street,
+      post_code: post_code,
+      location: location,
+      user: user,
+      country: country,
+      city: city,
+      district: district,
+      town: town,
+    });
+
+    return this.addressRepository.save(address);
+  }
+
+  async update(request: Request, response: Response, next: NextFunction) {
+    const id = parseInt(request.params.id);
+    const {
+      addressType,
+      addressLine,
+      street,
+      post_code,
+      location,
+      userId,
+      countryId,
+      cityId,
+      districtId,
+      townId,
+    } = request.body;
+
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    const country = await this.countryRepository.findOne({
+      where: { id: countryId },
+    });
+    const city = await this.cityRepository.findOne({ where: { id: cityId } });
+    const district = await this.districtRepository.findOne({
+      where: { id: districtId },
+    });
+    const town = await this.townRepository.findOne({ where: { id: townId } });
+
+    return this.addressRepository.update(
+      { id },
+      {
         addressType,
         addressLine,
         street,
         post_code,
         location,
-        userId,
-        countryId,
-        cityId,
-        districtId,
-        townId
-    } = request.body
-
-    const user = await this.userRepository.findOne({ where: { id: userId } })
-    const country = await this.countryRepository.findOne({ where: { id: countryId } })
-    const city = await this.cityRepository.findOne({ where: { id: cityId } })
-    const district = await this.districtRepository.findOne({ where: { id: districtId } })
-    const town = await this.townRepository.findOne({ where: { id: townId } })
-
-
-    const address = Object.assign(new Address(), {
-        addressType: addressType,
-        addressLine : addressLine,
-        street : street,
-        post_code : post_code,
-        location : location,
-        user : user,
-        country : country,
-        city : city,
-        district: district,
-        town: town
-    })
-
-    return this.addressRepository.save(address)
-}
+        user,
+        country,
+        city,
+        district,
+        town,
+      }
+    );
+  }
 }

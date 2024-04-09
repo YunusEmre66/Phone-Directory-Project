@@ -1,55 +1,58 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { User } from "./User";
 import { Country } from "./Country";
 import { City } from "./City";
 import { District } from "./District";
 import { Town } from "./Town";
 
-enum type { JOB = "iş", HOME= "ev"}
+enum type {
+  JOB = "iş",
+  HOME = "ev",
+}
 
-
-@Entity ()
+@Entity()
 export class Address {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column({ type: "enum", enum: type, default: type.HOME })
+  addressType: type;
 
-    @Column( {type: "enum", enum: type, default: type.HOME})
-    addressType: type;;
+  @Column()
+  addressLine: string;
 
-    @Column()
-    addressLine: string; 
+  @Column()
+  street: string;
 
-    @Column()
-    post_code : string;
-    
-    @Column()
-    location : string;
+  @Column()
+  post_code: string;
 
-    @ManyToOne(() => User, user => user.id)  //! bir çok adres bir kullanıcıya ait olabilir, bu veriler veritabanına veya req.body tarafına elle girilen veriler değil. id verileri req.body ye elle veri girdiğimizde otomatik olarak oluşur.
-    @JoinColumn()
-    user : User;
+  @Column()
+  location: string;
 
-    @ManyToOne(() => Country, (country) => country.id)  
-    @JoinColumn()
-    country: Country 
+  @ManyToOne(() => User, (user) => user.id) //! bir çok adres bir kullanıcıya ait olabilir, bu veriler veritabanına veya req.body tarafına elle girilen veriler değil. id verileri req.body ye elle veri girdiğimizde otomatik olarak oluşur.
+  @JoinColumn()
+  user: User;
 
-    @ManyToOne(() => City, (city) => city.id)  
-    @JoinColumn()
-    city: City
+  @ManyToOne(() => Country, (country) => country.id)
+  @JoinColumn()
+  country: Country;
 
-    @ManyToOne(() => District, (district) => district.id)
-    @JoinColumn()
-    district: District
+  @ManyToOne(() => City, (city) => city.id)
+  @JoinColumn()
+  city: City;
 
-    @ManyToOne(()=> Town, (town) => town.id)
-    @JoinColumn()
-    town: Town
+  @ManyToOne(() => District, (district) => district.id)
+  @JoinColumn()
+  district: District;
 
-
-
-
-
-
-
+  @ManyToOne(() => Town, (town) => town.id)
+  @JoinColumn()
+  town: Town;
 }

@@ -57,12 +57,19 @@ export const Routes = [
     controller: AddressController,
     route: "/address/user/:userId",
     action: "userOne",
-  },{
-    method : "post",
-    route : "/address/add",
-    controller : AddressController,
-    action :"save"
-  }
+  },
+  {
+    method: "post",
+    route: "/address/add",
+    controller: AddressController,
+    action: "save",
+  },
+  {
+    method: "put",
+    route: "/address/:id",
+    controller: AddressController,
+    action: "update",
+  },
 
   //   , {
   //     method: "get",
