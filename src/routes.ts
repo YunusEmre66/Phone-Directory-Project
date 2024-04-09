@@ -83,6 +83,16 @@ export const Routes = [
     route: "/country/:countryId",
     controller: CountryController,
     action: "countryUsers",
+  },{
+    method: "post",
+    route: "/country/add",
+    controller: CountryController,
+    action: "save",
+  },{
+    method: "put",
+    route: "/country/:id",
+    controller: CountryController,
+    action: "update",
   },
 
   //   , {

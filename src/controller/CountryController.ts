@@ -32,7 +32,23 @@ export class CountryController {
     }
 
     return address;
+  }
 
-    return;
+  async save(request: Request, response: Response, next: NextFunction) {
+    const { name } = request.body;
+
+    const country = Object.assign(new Country(), { name });
+    return this.countryRepository.save(country);
+  }
+
+  async update(request: Request, response: Response, next: NextFunction) {
+    const id = parseInt(request.params.id); // id: 1
+    const { name } = request.body; // name: "Turkey"
+
+    const country = await this.countryRepository.update({ id }, { name });
+
+    if (country.affected) {
+      return "country updated successfully";
+    }  
   }
 }
