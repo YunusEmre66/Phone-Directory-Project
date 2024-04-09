@@ -1,4 +1,5 @@
 import { AddressController } from "./controller/AddressController";
+import { CityController } from "./controller/CityController";
 import { CountryController } from "./controller/CountryController";
 import { UserController } from "./controller/UserController";
 
@@ -83,18 +84,45 @@ export const Routes = [
     route: "/country/:countryId",
     controller: CountryController,
     action: "countryUsers",
-  },{
+  },
+  {
     method: "post",
     route: "/country/add",
     controller: CountryController,
     action: "save",
-  },{
+  },
+  {
     method: "put",
     route: "/country/:id",
     controller: CountryController,
     action: "update",
   },
 
+  //! city
+  {
+    method: "get",
+    route: "/city/all",
+    controller: CityController,
+    action: "all",
+  },
+  {
+    method: "get",
+    route: "/city/:cityId",
+    controller: CityController,
+    action: "cityUsers",
+  },
+  {
+    method: "post",
+    route: "/city/add",
+    controller: CityController,
+    action: "save",
+  },
+  {
+    method:"put",
+    route:"/city/:id",
+    controller:CityController,
+    action:"update"
+  }
   //   , {
   //     method: "get",
   //     route: "/search",
