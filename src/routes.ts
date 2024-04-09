@@ -1,6 +1,9 @@
 import { AddressController } from "./controller/AddressController";
 import { CityController } from "./controller/CityController";
 import { CountryController } from "./controller/CountryController";
+import { DistrictController } from "./controller/DistrictController";
+import { FileController } from "./controller/FileController";
+import { TownController } from "./controller/TownController";
 import { UserController } from "./controller/UserController";
 
 export const Routes = [
@@ -118,11 +121,57 @@ export const Routes = [
     action: "save",
   },
   {
-    method:"put",
-    route:"/city/:id",
-    controller:CityController,
-    action:"update"
-  }
+    method: "put",
+    route: "/city/:id",
+    controller: CityController,
+    action: "update",
+  },
+  //! district
+  {
+    method: "get",
+    route: "/district/all",
+    controller: DistrictController,
+    action: "all",
+  },
+  {
+    method: "post",
+    route: "/district/add",
+    controller: DistrictController,
+    action: "save",
+  },
+  {
+    method: "put",
+    route: "/district/:id",
+    controller: DistrictController,
+    action: "update",
+  },
+
+  //! town 
+  {
+    method: "get",
+    route: "/town/all",
+    controller: TownController,
+    action: "all",
+  },
+  {
+    method: "post",
+    route: "/town/add",
+    controller: TownController,
+    action: "save",
+  },
+  {
+    method: "put",
+    route: "/town/:id",
+    controller: TownController,
+    action: "update",
+  }, {
+    method: "get",
+    route: "/file-read",
+    controller: FileController,
+    action: "all"
+}, 
+  
+
   //   , {
   //     method: "get",
   //     route: "/search",
