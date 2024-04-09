@@ -3,6 +3,7 @@ import { CityController } from "./controller/CityController";
 import { CountryController } from "./controller/CountryController";
 import { DistrictController } from "./controller/DistrictController";
 import { FileController } from "./controller/FileController";
+import { SearchController } from "./controller/SearchController";
 import { TownController } from "./controller/TownController";
 import { UserController } from "./controller/UserController";
 
@@ -169,7 +170,12 @@ export const Routes = [
     route: "/file-read",
     controller: FileController,
     action: "all"
-}, 
+}, {
+  method: "get",
+  route: "/search",
+  controller: SearchController,
+  action: "search"
+} 
   
 
   //   , {
