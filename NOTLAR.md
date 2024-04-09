@@ -17,6 +17,8 @@ yanlış url, yanlış metod, hatalı başlık, hatalı gövde(body), hatalı pa
 
 Express.js, yolları tanımlandıkları sıraya göre işler. Bu durumda, /address/:id yolu önce tanımlandığı için, all bir id olarak kabul edilebilir. Yani, /address/all URL'sini ziyaret ettiğinizde, one eylemi tetiklenebilir ve all id olarak kabul edilebilir.
 **************************************
+
+PROJE SONA ERMİŞTİR. 04.09.24 TARİHİ İTİBARİYLE
 **************************************
 **************************************
 **************************************
